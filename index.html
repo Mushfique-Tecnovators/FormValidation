@@ -92,6 +92,113 @@
 </style>
 
 <body id="body">
+    <div class="container">
+        <h2>REGISTRATION FORM</h2>
+        <form action="" onsubmit="event.preventDefault();  validcheck()">
+            <ul>
+                <li> <label for="name" id="namelabel">Name :</label><input type="text" placeholder="Name" id="name">
+                </li>
+                <span id="span1" class="span" style="display:none">Please Fill out this field</span>
+                <li> <label for="email">Email :</label><input type="email" placeholder="Email" id="email"></li>
+                <span id="span2" class="span" style="display:none">Please Fill out this field</span>
+                <li><label for="password">Password :</label><input type="password" placeholder="Password" id="password">
+                </li>
+                <span id="span3" class="span" style="display: none;">Please Fill Password</span>
+                <li> <label for="date">D.O.B :</label><input type="date" id="date"></li>
+                <span id="span4" class="span" style="display: none;">Please select your D.O.B</span>
+            </ul>
+            <div id="btn">
+                <button type="submit" value="submit" id="submit">Submit</button>
+
+                <button id="cancel">
+                    cancel
+                </button>
+            </div>
+
+        </form>
+    </div>
+   <div id="output">
+        <h2>Thanks for Submit !</h2>
+        <p>Name : <span id="getName"></span> </p>
+        <p>Email :<span id="getEmail"></span> </p>
+        <p>Date of Birth :<span id="getDate"></span></p>
+        <p style="font-size: 30px; ">Your's submitted form Data ..!</p>
+    </div>
+    <script>
+        const cancel = document.getElementById("cancel");
+        const clear = document.querySelectorAll('input');
+        cancel.addEventListener('click', () => {
+
+            clear.forEach(input => input.value = "");
+
+        });
+         function validcheck() {
+            var flag = true;
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let date = document.getElementById("date").value;
+            let span1 = document.getElementById("span1");
+            let span2 = document.getElementById("span2");
+
+            //validation only for name
+            if (name.length == 0 ) {
+                span1.style.display = "block";
+                flag = false;
+            }
+            else if (name.length < 6) {
+                span1.innerText = "Fill atleast 8 characters"
+                flag = false;
+            }
+            else if(name.length>11){
+                span1.innerText = "Maximum 10 characters allowed"
+                flag = false;
+            }
+            else {
+                span1.style.display = "none"
+                flag = true;
+            }
+            //validation only for email
+            if (email == "") {
+                span2.style.display = "block";
+                span2.innerText = "Please Fill Your Email"
+                flag = false;
+            } else {
+                span2.style.display = "none";
+            }
+            //validation only for password   
+            if (password.length == 0) {
+                span3.style.display = "block";
+            } else {
+                span3.style.display = "none";
+            }
+            //validation only for date of birth
+            if (date.length == 0) {
+                span4.style.display = "block";
+            } else {
+                span4.style.display = "none";
+            }
+
+            document.getElementById("getName").innerHTML = name;
+            document.getElementById("getEmail").innerHTML = email;
+            document.getElementById("getDate").innerHTML = date;
+            let submit = document.getElementById("submit");
+            let output = document.getElementById("output");
+            let cancel = document.getElementById("cancel");
+            if(name.length!=0 && email.length!=0 && password.length!=0 && date.length!=0){
+            submit.addEventListener('click', () => {
+                output.style.display = "block"
+            });
+            cancel.addEventListener('click', () => {
+                output.style.display = "none";
+            });
+            flag=false;
+            return false;
+        }
+    }
+    </script>
+
    
 </body>
 </html>
